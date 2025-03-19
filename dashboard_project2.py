@@ -32,8 +32,8 @@ y2_pred_RF_0 = RF_model_0.predict(X0)
 
 # Evaluate errors
 MAE_RF_0=metrics.mean_absolute_error(y2,y2_pred_RF_0)
-MBE_RF_0=np.mean(y2-y2_pred_RF_0) 
-MSE_RF_0=metrics.mean_squared_error(y2,y2_pred_RF_0)  
+MBE_RF_0=np.mean(y2-y2_pred_RF_0)
+MSE_RF_0=metrics.mean_squared_error(y2,y2_pred_RF_0)
 RMSE_RF_0= np.sqrt(metrics.mean_squared_error(y2,y2_pred_RF_0))
 cvRMSE_RF_0=RMSE_RF_0/np.mean(y2)
 NMBE_RF_0=MBE_RF_0/np.mean(y2)
@@ -67,6 +67,8 @@ def generate_table(dataframe, max_rows=10):
 
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+server = app.server
 
 app.layout = html.Div(
     style={'margin': '30px', 'padding': '20px'},
@@ -146,7 +148,7 @@ def train_model(n_clicks, selected_features, num_trees, max_depth):
             'MBE': MBE_RF_2,
             'MSE': MSE_RF_2,
             'RMSE': RMSE_RF_2,
-            'cvMSE': cvRMSE_RF_2,
+            'cvRMSE': cvRMSE_RF_2,
             'NMBE': NMBE_RF_2
         }
 
@@ -171,7 +173,7 @@ def train_model(n_clicks, selected_features, num_trees, max_depth):
     [Input('tabs', 'value'),
      Input('date-picker', 'start_date'),
      Input('date-picker', 'end_date')],
-     [State('custom-forecast-store', 'data'),
+    [State('custom-forecast-store', 'data'),
      State('custom-metrics-store', 'data')]
 )
 
