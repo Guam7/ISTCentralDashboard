@@ -254,10 +254,12 @@ def render_content(tab, start_date, end_date, custom_forecast, custom_metrics):
                 # Left side: Inputs stacked vertically
                 html.Div([
                     html.Label("Number of Trees (n_estimators):"),
-                    dcc.Input(id='num-trees', type='number', value=200, step=10, style={'margin-bottom': '10px'}),
+                    dcc.Input(id='num-trees', type='number', value=50, step=10, style={'margin-bottom': '10px'}),
 
                     html.Label("Max Depth:"),
-                    dcc.Input(id='max-depth', type='number', value=20, step=1)
+                    dcc.Input(id='max-depth', type='number', value=5, step=1),
+
+                    html.P('For the online version, increasing these values might cause the server to run out of memory.')
                 ], style={'display': 'flex', 'flex-direction': 'column', 'margin-right': '20px'}),
 
                 # Right side: Centered button
@@ -292,7 +294,7 @@ def render_content(tab, start_date, end_date, custom_forecast, custom_metrics):
             ], style={'display': 'flex', 'align-items': 'center', 'justify-content': 'space-between', 'width': '100%'}),
 
             html.Br(),
-            html.H5("Model Results:"),
+            html.H4("Model Results:"),
             html.Div(id='model-results'),  # Placeholder for model output
 
             html.P('WARNING: changing to another tab will reset the model. To see the full model metrics check "Error Metrics and Forecast", but keep in mind that returning to this tab will reset the model.')
